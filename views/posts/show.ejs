@@ -1,0 +1,56 @@
+<% layout("layouts/boilerplate") %>
+<body>
+  <div class="card mb-3">
+    <!-- ------
+  POST HEADER
+  ------- -->
+
+    <%- include('../partials/postHeader', { post }) %>
+
+    <!-- -----
+  POST BODY
+  ----- -->
+
+    <%- include('../partials/postBody', { post, selectPost:false }) %>
+
+    <!-- ------
+  POST FOOTER
+  ------- -->
+
+    <%- include('../partials/postFooter', { post }) %>
+
+    <!-- ------
+ CoOMMENTS
+  ------- -->
+
+    <%if(post.comments.length > 0){ %>
+    <ul class="list-group list-group-flush">
+      <%for(comment of post.comments){%> <%- include('../partials/comment', {comment, isReply: false })%> <%
+      if(comment.replies.length > 0) {%>
+      <!-- REPLY CHAIN -->
+      <%for(replycomment of comment.replies){%> <%-include('../partials/comment', { comment: replycomment, isReply: true
+      })%> <%}%> <% } %> <% } %>
+    </ul>
+
+    <% } %>
+  </div>
+
+  <!-- ------
+  POST COMMENT
+  ------- -->
+
+  <form action="/posts/<%=post._id%>" method="post">
+    <div class="input-group mb-2">
+      <span class="input-group-text" id="commentIcon">🗪</span>
+      <input
+        type="text"
+        placeholder="Kommentieren ..."
+        name="comment[body]"
+        class="form-control"
+        id="basic-url"
+        aria-describedby="commentIcon" />
+      <button class="btn btn-outline-secondary" type="button submit" id="button-comment">Posten</button>
+    </div>
+  </form>
+  <a href="/posts">Go back</a>
+</body>

@@ -1,0 +1,54 @@
+<% layout("layouts/boilerplate") %>
+
+<body>
+  <div class="d-flex gap-3 mt-1 mb-3 w-100">
+    <img src="<%= user.image.avatarProfilePage %>" alt="" class="avatar" />
+
+    <div class="w-100">
+      <div class="d-flex justify-content-between">
+        <div class="d-flex flex-column">
+          <h4 class="m-0"><%= user.displayname %></h4>
+          <p class="text-muted mb-1">@<%= user.username %></p>
+        </div>
+
+        <% if (currentUser && user.equals(currentUser._id)) { %>
+        <div class="dropdown ms-2">
+          <button class="btn btn-sm" data-bs-toggle="dropdown">
+            <span class="burgerMenu">• • •</span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="/profile/<%= user.username %>/edit">Editieren</a></li>
+          </ul>
+        </div>
+        <% } %>
+      </div>
+
+      <p class="mb-0"><%= user.bio %></p>
+    </div>
+  </div>
+
+  <%for(let post of posts.reverse()){%>
+
+  <div class="card mb-3">
+    <!-- ------
+  POST HEADER
+  ------- -->
+
+    <%- include('../partials/postHeader', { post }) %>
+
+    <!-- -----
+  POST BODY
+  ----- -->
+
+    <a href="/posts/<%=post._id%>" class="text-decoration-none text-dark">
+      <%- include('../partials/postBody', { post }) %>
+    </a>
+
+    <!-- ------
+  POST FOOTER
+  ------- -->
+
+    <%- include('../partials/postFooter', { post }) %>
+  </div>
+  <%}%>
+</body>

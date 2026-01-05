@@ -1,0 +1,87 @@
+.showAllCommentsLink,
+.userLink {
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}
+
+.showAllCommentsLink:hover,
+.userLink:hover {
+  text-decoration: underline;
+}
+
+.heart,
+.comment {
+  cursor: pointer;
+  display: inline-block;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.heart svg,
+.comment svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  color: grey;
+  transition: color 0.2s ease, transform 0.2s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+  vertical-align: sub;
+}
+
+.burgerMenu {
+  color: grey;
+}
+
+.heart svg:hover {
+  color: green;
+  transform: scale(1.2);
+}
+
+.comment svg:hover {
+  color: red;
+  transform: scale(1.2);
+}
+
+.heart.liked svg {
+  fill: green;
+  stroke: green;
+  color: green;
+}
+
+.commentBox {
+  border: none;
+}
+
+.avatar {
+  border: 1px solid rgb(226, 226, 226);
+  border-radius: 100%;
+  transition: scale 0.3s;
+}
+
+.avatar:hover {
+  scale: 110%;
+}
+
+.editImageButton {
+  background: none;
+  border: none;
+}
+
+.editAvatarImage:hover {
+  scale: 110%;
+}
+
+img {
+  height: 100%;
+}
+
+.selectPost {
+  transition: background-color 0.5s;
+}
+
+.selectPost:hover {
+  background-color: rgba(226, 226, 226, 0.5);
+}

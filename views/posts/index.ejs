@@ -1,0 +1,93 @@
+<% layout("layouts/boilerplate") %>
+<body>
+  <!-- -----------------------
+  ABILITY TO POST IF LOGGED IN
+  ------------------------- -->
+  <%if(currentUser){%>
+  <form
+    action="/posts"
+    method="POST"
+    class="needs-validation"
+    novalidate
+    enctype="multipart/form-data"
+    accept="image/*">
+    <div class="mb-3">
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Woran denkst du gerade?"
+          id="postTextarea"
+          name="post[body]"
+          required />
+        <button class="btn btn-warning" type="button submit" id="button-post">Post</button>
+      </div>
+      <input class="form-control" type="file" id="formFile" name="image" />
+    </div>
+  </form>
+
+  <%}%> <%for(let post of posts.reverse()){%>
+  <div class="card mb-3">
+    <!-- ------
+  POST HEADER
+  ------- -->
+
+    <%- include('../partials/postHeader', { post }) %>
+
+    <!-- -----
+  POST BODY
+  ----- -->
+
+    <a href="/posts/<%=post._id%>" class="text-decoration-none text-dark">
+      <%- include('../partials/postBody', { post }) %>
+    </a>
+
+    <!-- ------
+  POST FOOTER
+  ------- -->
+
+    <%- include('../partials/postFooter', { post }) %>
+
+    <!-- ------
+  DISPLAY COMMENTS
+  ------- -->
+
+    <ul class="list-group list-group-flush">
+      <% post.comments.slice(0, 2).forEach(comment => { %>
+      <li class="list-group-item">
+        <a href="/profile/<%=comment.author.username%>" class="userLink"
+          ><strong><%= comment.author.username %></strong></a
+        >
+        <span class="commentBody"><%= comment.body %></span>
+      </li>
+      <% }) %> <% if(post.comments.length > 2){ %>
+      <li class="list-group-item">
+        <a href="/posts/<%=post._id%>" class="text-muted showAllCommentsLink"><small> Mehr anzeigen</small></a>
+      </li>
+      <% } %>
+
+      <!-- ------
+  POST COMMENT
+  ------- -->
+
+      <%if(currentUser){%>
+      <li class="list-group-item p-0">
+        <form action="/posts/<%=post._id%>" method="post" class="needs-validation" novalidate>
+          <div class="input-group">
+            <input
+              type="text"
+              placeholder="Kommentieren ..."
+              name="comment[body]"
+              required
+              class="form-control commentBox"
+              id="basic-url"
+              aria-describedby="commentIcon" />
+            <button class="btn btn-outline-secondary" type="button submit" id="button-comment">Posten</button>
+          </div>
+        </form>
+      </li>
+      <% } %>
+    </ul>
+  </div>
+  <%}%>
+</body>

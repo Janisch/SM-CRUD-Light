@@ -1,0 +1,10 @@
+<% const hasSelectPost = (typeof selectPost === "undefined") ? true : selectPost; %>
+
+<div class="card-body <%=hasSelectPost ? "selectPost" : ''%>">
+  <blockquote class="blockquote mb-0">
+    <p><%=post.body%></p>
+    <% if (post.image && post.image.url) { %>
+    <img class="card-img-top" src="<%= post.image.url %>" alt="" />
+    <% } %>
+  </blockquote>
+</div>

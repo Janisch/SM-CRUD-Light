@@ -1,0 +1,32 @@
+<div class="card-header p-2">
+  <div class="d-flex align-items-center gap-2">
+    <a href="/profile/<%=post.author.username%>" class="userLink"
+      ><img src="<%=post.author.image.avatarPostHeader%>" class="avatar"
+    /></a>
+
+    <div class="d-flex justify-content-between w-100">
+      <div>
+        <a href="/profile/<%=post.author.username%>" class="userLink">
+          <strong><%=post.author.displayname%></strong>
+        </a>
+        <div class="text-muted">@<%=post.author.username%> • <%= post.elapsedTime() %></div>
+      </div>
+
+      <% if(currentUser && post.author.equals(currentUser._id)){ %>
+      <div class="dropdown">
+        <button class="btn" data-bs-toggle="dropdown">
+          <span class="burgerMenu">• • •</span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="/posts/<%=post._id%>/edit">Editieren</a></li>
+          <li>
+            <form action="/posts/<%=post._id%>?_method=DELETE" method="POST">
+              <button class="dropdown-item">Löschen</button>
+            </form>
+          </li>
+        </ul>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>
