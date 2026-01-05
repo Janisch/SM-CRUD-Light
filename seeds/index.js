@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Post = require('../models/posts.js');
 const User = require('../models/users.js');
 const Comment = require('../models/comments.js');
-mongoose.connect('mongodb://localhost:27017/obojima');
+mongoose.connect(process.env.MONGO_DB);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
@@ -38,7 +38,7 @@ const seed = async () => {
   }));
 
   for (const post of postsWithAuthors) {
-    const randomNumOfComments = Math.floor(Math.random() * 6); // 0–5 Kommentare
+    const randomNumOfComments = Math.floor(Math.random() * 6); // 0–5 comments
     for (let i = 0; i < randomNumOfComments; i++) {
       post.comments.push(randomElement(pushedComments)._id);
     }
