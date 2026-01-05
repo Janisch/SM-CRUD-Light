@@ -10,7 +10,10 @@
     <div>
       <input id="image" name="image" type="file" accept="image/*" class="visually-hidden" />
       <label for="image" class="m-0 p-0 d-inline-block" style="cursor: pointer">
-        <img src="<%= user.image.avatarProfilePage %>" alt="Avatar ändern" class="editAvatarImage" />
+        <%- user?.image?.avatarProfilePage ? `<img
+          src="${user.image.avatarProfilePage}"
+          alt="Avatar ändern"
+          class="editAvatarImage" />` : `<span class="userLink">Upload Image</span>` %>
       </label>
     </div>
 

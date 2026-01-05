@@ -1,7 +1,9 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 const Post = require('../models/posts.js');
 const User = require('../models/users.js');
 const Comment = require('../models/comments.js');
+const Image = require('../models/images.js');
 mongoose.connect(process.env.MONGO_DB);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -22,6 +24,7 @@ const seed = async () => {
   await Post.deleteMany({});
   await User.deleteMany({});
   await Comment.deleteMany({});
+  await Image.deleteMany({});
 
   //create Users
   const insertedUsers = await User.insertMany(users);

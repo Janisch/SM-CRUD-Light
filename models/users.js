@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const passportLocalMongoose = require('passport-local-mongoose').default;
 const Post = require('./posts.js');
+const Image = require('./images.js');
 const Comment = require('./comments.js');
 
 const UserSchema = new Schema({
@@ -22,7 +23,8 @@ const UserSchema = new Schema({
     lowercase: true,
     unique: [true, 'Diese Email wird bereits verwendet.'],
   },
-  image: { type: Schema.Types.ObjectId, ref: 'Image', default: '69485367189f82ce958459a2' },
+  //default image should be changed in production to cloudinary image
+  image: { type: Schema.Types.ObjectId, ref: 'Image' },
 });
 
 UserSchema.methods.findAllPosts = function () {

@@ -53,9 +53,10 @@ module.exports.updateProfile = async (req, res) => {
   const { bio } = req.body;
   const user = await User.findOne({ username });
   if (req.file) {
-    const oldImage = await Image.findById(user.image);
-    await destroyImage(oldImage);
-
+    if (user.image) {
+      const oldImage = await Image.findById(user.image);
+      await destroyImage(oldImage);
+    }
     const image = await uploadBufferAndCreateImage(req.file.buffer);
     user.image = image;
   }

@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const ImageSchema = new Schema({
   url: {
     type: String,
+    //default should be changed to custom cloudinary image
     default: 'https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png',
   },
   publicId: String,

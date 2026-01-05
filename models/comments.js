@@ -65,10 +65,8 @@ CommentSchema.methods.toggleLikeById = async function (userId) {
   const userIndex = this.likes.findIndex((id) => id.toString() === userId.toString());
 
   if (userIndex === -1) {
-    // User hat noch nicht geliked → hinzufügen
     this.likes.push(userId);
   } else {
-    // User hat schon geliked → entfernen
     this.likes.splice(userIndex, 1);
   }
   return this;

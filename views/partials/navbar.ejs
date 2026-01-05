@@ -28,8 +28,11 @@
       <%} else{%>
       <li class="nav-item">
         <a href="/profile/<%=currentUser.displayname%>" class="nav-link active"
-          ><img src="<%=currentUser.image.avatarComment%>" alt="" class="avatar"
-        /></a>
+          ><%- currentUser.image?.avatarComment ? `<img
+            src="${currentUser.image.avatarComment}"
+            alt=""
+            class="avatar" />` : `<span class="userLink">${currentUser.displayname}</span>` %>
+        </a>
       </li>
       <li class="nav-item">
         <form action="/logout" method="POST">
