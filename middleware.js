@@ -5,14 +5,13 @@ const ExpressError = require('./utils/ExpressError.js');
 const { postSchema, userSchema } = require('./schemas.js');
 
 module.exports.isLoggedIn = (req, res, next) => {
-  if (!req.isAuthenticated()) {
-    if (req.originalUrl) {
-      req.session.returnTo = req.originalUrl;
-    }
-    req.flash('error', 'Bitte logge dich ein.');
+  if (req.isAuthenticated()) return next();
+
+  req.flash('error', 'Bitte logge dich ein.');
+  if (req.accepts('html')) {
     return res.redirect('/login');
   }
-  next();
+  return res.status(401).json({ redirectTo: '/login' });
 };
 
 module.exports.isPostAuthor = async (req, res, next) => {
