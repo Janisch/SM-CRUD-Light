@@ -61,15 +61,16 @@ CommentSchema.methods.addReply = async function (reply) {
   return this;
 };
 
-CommentSchema.methods.toggleLikeById = async function (userId) {
+CommentSchema.methods.toggleLikeById = function (userId) {
   const userIndex = this.likes.findIndex((id) => id.toString() === userId.toString());
 
   if (userIndex === -1) {
     this.likes.push(userId);
+    return true;
   } else {
     this.likes.splice(userIndex, 1);
+    return false;
   }
-  return this;
 };
 
 CommentSchema.post('findOneAndDelete', async function (doc) {

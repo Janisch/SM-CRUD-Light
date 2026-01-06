@@ -17,11 +17,23 @@ module.exports.createComment = async (req, res) => {
 };
 
 module.exports.likeComment = async (req, res) => {
-  const { postId, commentId } = req.params;
-  const comment = await Comment.findById(commentId);
-  comment.toggleLikeById(req.user._id);
-  comment.save();
-  res.redirect(`/posts/${postId}`);
+  try {
+    const { commentId } = req.params;
+    const comment = await Comment.findById(commentId);
+    if (!comment) {
+      throw new ExpressError('Comment not found', 404);
+    }
+
+    const liked = comment.toggleLikeById(req.user._id);
+    await comment.save();
+
+    return res.json({
+      liked,
+      likesAmount: comment.likes.length,
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
 module.exports.createReplyComment = async (req, res) => {

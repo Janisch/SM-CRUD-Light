@@ -1,15 +1,21 @@
 document.addEventListener('click', async (e) => {
   const button = e.target.closest('.heart');
-  if (!button) return;
+  if (!button || button.dataset.loading === '1') return;
 
-  const postId = button.dataset.postId;
+  const { postId, commentId } = button.dataset;
   const likesAmount = button.querySelector('.like-count');
+  let api = '';
 
-  if (button.dataset.loading === '1') return;
+  if (commentId) {
+    api = `/posts/${postId}/${commentId}/like`;
+  } else {
+    api = `/posts/${postId}/like`;
+  }
+
   button.dataset.loading = '1';
 
   try {
-    const res = await fetch(`/posts/${postId}/like`, {
+    const res = await fetch(api, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
