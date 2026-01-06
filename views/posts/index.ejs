@@ -10,6 +10,8 @@
     accept="image/*">
     <div class="mb-3">
       <div class="input-group">
+        <label for="imageInput" class="btn btn-secondary">Upload Image</label>
+        <input class="form-control d-none" type="file" id="imageInput" name="image" />
         <input
           type="text"
           class="form-control"
@@ -19,7 +21,9 @@
           required />
         <button class="btn btn-warning" type="button submit" id="button-post">Post</button>
       </div>
-      <input class="form-control" type="file" id="formFile" name="image" />
+      <div class="d-flex text-muted gap-2">
+        <small id="fileNameDisplay" class="d-none"></small>
+      </div>
     </div>
   </form>
 

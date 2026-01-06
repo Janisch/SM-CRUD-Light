@@ -85,3 +85,13 @@ img {
 .selectPost:hover {
   background-color: rgba(226, 226, 226, 0.5);
 }
+
+#fileNameDisplay {
+  color: grey;
+  transition: color 0.25s ease;
+}
+
+#fileNameDisplay:hover {
+  cursor: pointer;
+  color: red;
+}
