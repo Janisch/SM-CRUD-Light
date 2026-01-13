@@ -62,7 +62,7 @@ go to **localhost:3000** to view.
 | POST   | /posts/:postId                   | Create a top-level comment                |
 | POST   | /posts/:postId/:commentId        | Create a reply to a comment               |
 | DELETE | /posts/:postId/:commentId        | Delete a comment                          |
-| POST   | /posts/:postId/like              | Like a comment                            |
+| POST   | /posts/:postId/:commentId/like     | Like a comment                            |
 
 ## Notes
 - This project is intended for learning and prototyping purposes only
