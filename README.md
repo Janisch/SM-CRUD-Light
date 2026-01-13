@@ -56,9 +56,9 @@ go to **localhost:3000** to view.
 | Method | Endpoint                         | Description                              |
 |--------|----------------------------------|------------------------------------------|
 | POST   | /posts                           | Create a post (image optional)            |
-| PATCH  | /:postId                         | Update a post                             |
-| DELETE | /:postId                         | Delete a post                             |
-| POST   | /:postId/like                    | Like a post                               |
+| PATCH  | /posts/:postId                   | Update a post                             |
+| DELETE | /posts/:postId                  | Delete a post                             |
+| POST   | /posts/:postId/like              | Like a post                               |
 | POST   | /posts/:postId                   | Create a top-level comment                |
 | POST   | /posts/:postId/:commentId        | Create a reply to a comment               |
 | DELETE | /posts/:postId/:commentId        | Delete a comment                          |
